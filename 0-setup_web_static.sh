@@ -19,9 +19,10 @@ echo "<html>
 </html>" | sudo tee /data/web_static/releases/test/index.html
 sudo chown -R ubuntu:ubuntu /data/
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
-sudo sed -i '48i\\n' /etc/nginx/sites-available/default
-sudo sed -i '49i\\tlocation /hbnb_static {' /etc/nginx/sites-available/default
-sudo sed -i '50i\\t\talias /data/web_static/current;' /etc/nginx/sites-available/default
-sudo sed -i '51i\\t}' /etc/nginx/sites-available/default
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo sed -i '43i\\n' /etc/nginx/sites-available/default
+sudo sed -i '44i\\tlocation /hbnb_static {' /etc/nginx/sites-available/default
+sudo sed -i '45i\\t\talias /data/web_static/current;' /etc/nginx/sites-available/default
+sudo sed -i '46i\\t}' /etc/nginx/sites-available/default
 sudo service nginx restart
 exit 0
