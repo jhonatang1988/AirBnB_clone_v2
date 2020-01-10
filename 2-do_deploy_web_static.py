@@ -21,7 +21,6 @@ def do_deploy(archive_path):
             folder = "mkdir -p /data/web_static/releases/{}".format(rfn)
             foldername = "/data/web_static/releases/{}/".format(rfn)
             run(folder)
-            put(archive_path, '/tmp/')
             untar = "tar -C {} \
             -xzf /tmp/{}".format(foldername, tarn)
             run(untar)
