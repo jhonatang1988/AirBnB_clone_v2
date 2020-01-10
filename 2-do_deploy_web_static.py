@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-# script to deploy an archive to web servers
+"""
+script to deploy an archive to web servers
+"""
 import os
 from fabric.api import *
 import tarfile
@@ -7,6 +9,7 @@ import tarfile
 
 @hosts(['104.196.19.203', '104.196.170.235'])
 def do_deploy(archive_path):
+    """ deploy a folder"""
 
     env.user = 'ubuntu'
     env.key_filename = '~/.ssh/id_rsa'
@@ -30,7 +33,6 @@ def do_deploy(archive_path):
             print("New version deployed!")
             return True
         else:
-            print("no encontro")
             return False
     except Exception as e:
         print(e)
