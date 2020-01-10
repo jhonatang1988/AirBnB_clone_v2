@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
-# script to configure in order to serve the static pages
-apt-get -y update
-apt-get -y install nginx
+#setsup webser to create a website using nginx
+sudo apt-get -y update
+sudo apt-get -y install nginx
 ufw allow 'Nginx HTTP'
-# instructions
-mkdir -p /data/web_static/releases/test/
-mkdir -p /data/web_static/shared/
+sudo service nginx start
+sudo mkdir -p /data/web_static/shared/
+sudo mkdir -p /data/web_static/releases/test/
 echo "<html>
   <head>
   </head>
   <body>
-    Fake content
+    Probando el pollo
   </body>
 </html>" > /data/web_static/releases/test/index.html
-# symbolic link to folder erase
-ln -sf /data/web_static/releases/test/ /data/web_static/current
-# change owner and group to ubuntu
-chown -R ubuntu:ubuntu /data/
-# change content of available-default
-sed -i '43i\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t autoindex on;\n\t}\n' /etc/nginx/sites-available/default
-# getting changes
-service nginx restart
+sudo chown -R ubuntu:ubuntu /data/
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo sed -i '43i\\n' /etc/nginx/sites-available/default
+sudo sed -i '44i\\tlocation /hbnb_static {' /etc/nginx/sites-available/default
+sudo sed -i '45i\\t\talias /data/web_static/current;' /etc/nginx/sites-available/default
+sudo sed -i '46i\\t}' /etc/nginx/sites-available/default
+sudo service nginx restart
 exit 0
