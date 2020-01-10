@@ -1,19 +1,24 @@
 #!/usr/bin/env bash
-#Prepare your web servers
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo service nginx start
-sudo mkdir -p /data/ /data/{web_static/,web_static/releases/,web_static/shared/,web_static/releases/test/}
-sudo touch /data/web_static/releases/test/index.html
+# script to configure in order to serve the static pages
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+# instructions
+mkdir -p /data/web_static/releases/test/
+mkdir -p /data/web_static/shared/
 echo "<html>
   <head>
   </head>
   <body>
-    Holberton School
+    Fake content
   </body>
-</html>" | sudo tee /data/web_static/releases/test/index.html
-sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
-sudo chown -R ubuntu:ubuntu /data/
-sudo sed -i '42i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
-sudo service nginx restart
+</html>" > /data/web_static/releases/test/index.html
+# symbolic link to folder erase
+ln -sf /data/web_static/releases/test/ /data/web_static/current
+# change owner and group to ubuntu
+chown -R ubuntu:ubuntu /data/
+# change content of available-default
+sed -i '43i\\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t autoindex on;\n\t}\n' /etc/nginx/sites-available/default
+# getting changes
+service nginx restart
 exit 0
