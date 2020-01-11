@@ -20,12 +20,12 @@ def do_deploy(archive_path):
             tarn = archive_path[9:]
             folder = "mkdir -p /data/web_static/releases/{}".format(rfn)
             foldername = "/data/web_static/releases/{}/".format(rfn)
+            put(archive_path, '/tmp/')
             run(folder)
-            untar = "tar -xzf /tmp/{} \
-            -C {}".format(tarn, foldername)
+            untar = "tar -xzf /tmp/{} -C {}".format(tarn, foldername)
             run(untar)
             run("sudo rm /tmp/{}".format(tarn))
-            run("sudo mv {}/web_static/* {}".format(foldername, foldername))
+            run("sudo mv {}/web_static* {}".format(foldername, foldername))
             run("sudo rm -rf {}/web_static".format(foldername))
             run("sudo rm -rf /data/web_static/current")
             run("sudo ln -s {} /data/web_static/current".format(foldername))
