@@ -9,6 +9,7 @@ import tarfile
 env.hosts = ['35.227.82.74', '35.231.166.249']
 env.user = 'ubuntu'
 
+
 def do_deploy(archive_path):
     """ deploy a folder"""
 
