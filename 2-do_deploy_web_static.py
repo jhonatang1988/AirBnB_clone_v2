@@ -6,7 +6,7 @@ import os
 from fabric.api import *
 import tarfile
 
-env.hosts = ['35.227.82.74', '35.231.166.249']
+env.hosts = ['104.196.19.203', '104.196.170.235']
 env.user = 'ubuntu'
 
 

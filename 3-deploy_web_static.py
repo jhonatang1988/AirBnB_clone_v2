@@ -5,6 +5,8 @@ import os
 import time
 from fabric.api import *
 
+env.hosts = ['104.196.19.203', '104.196.170.235']
+env.user = 'ubuntu'
 
 def do_pack():
 
@@ -27,14 +29,6 @@ def do_pack():
 """
 script to deploy an archive to web servers
 """
-import os
-from fabric.api import *
-import tarfile
-
-env.hosts = ['35.227.82.74', '35.231.166.249']
-env.user = 'ubuntu'
-
-
 def do_deploy(archive_path):
     """ deploy a folder"""
 
@@ -61,8 +55,11 @@ def do_deploy(archive_path):
         print(e)
 
 def deploy():
-    if not os.path.exists(archive_path):
-        return False
     apath = do_pack()
-    res = do_deploy(apath)
-    return res
+    if apath:
+        try:
+            res = do_deploy(apath)
+            return res
+        except Exception as e:
+            print(e)
+    return False
