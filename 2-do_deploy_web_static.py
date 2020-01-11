@@ -24,11 +24,11 @@ def do_deploy(archive_path):
             run(folder)
             untar = "tar -xzf /tmp/{} -C {}".format(tarn, foldername)
             run(untar)
-            run("sudo rm /tmp/{}".format(tarn))
-            run("sudo mv {}web_static/* {}".format(foldername, foldername))
-            run("sudo rm -rf {}web_static".format(foldername))
-            run("sudo rm -rf /data/web_static/current")
-            run("sudo ln -s {} /data/web_static/current".format(foldername))
+            run("rm /tmp/{}".format(tarn))
+            run("mv {}web_static/* {}".format(foldername, foldername))
+            run("rm -rf {}web_static".format(foldername))
+            run("rm -rf /data/web_static/current")
+            run("ln -s {} /data/web_static/current".format(foldername))
             print("New version deployed!")
             return True
         else:
