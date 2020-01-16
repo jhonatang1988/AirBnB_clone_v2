@@ -7,6 +7,10 @@ from fabric.api import *
 
 env.hosts = ['104.196.19.203', '104.196.170.235']
 env.user = 'ubuntu'
+"""
+pack files
+"""
+
 
 def do_pack():
 
@@ -29,6 +33,8 @@ def do_pack():
 """
 script to deploy an archive to web servers
 """
+
+
 def do_deploy(archive_path):
     """ deploy a folder"""
 
@@ -53,6 +59,11 @@ def do_deploy(archive_path):
         return True
     except Exception as e:
         print(e)
+
+"""
+deploy
+"""
+
 
 def deploy():
     apath = do_pack()
