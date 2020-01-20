@@ -9,7 +9,7 @@ if __name__ == '__main__':
 
     @app.route('/')
     def index():
-        app.strict_slashes=False
+        app.strict_slashes = False
         return 'Hello HBNB!'
 
     app.run()
