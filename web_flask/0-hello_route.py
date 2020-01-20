@@ -7,9 +7,8 @@ from flask import Flask
 if __name__ == '__main__':
     app = Flask(__name__)
 
-    @app.route('/')
+    @app.route('/', strict_slashes=False)
     def index():
-        app.strict_slashes = False
         return 'Hello HBNB!'
 
     app.run()
