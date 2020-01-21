@@ -50,7 +50,7 @@ class DBStorage:
                 objs = [item for sublist in obs for item in sublist]
 
             else:
-                objs = self.__session.query(cls).all()
+                objs = self.__session.query(eval(cls)).all()
 
             for obj in objs:
                     obj_id = getattr(obj, 'id')
@@ -95,6 +95,13 @@ class DBStorage:
             Session = scoped_session(sessionmaker(bind=self.__engine,
                                                   expire_on_commit=False))
             self.__session = Session()
+        except:
+            raise
+            print(":(")
+
+    def close(self):
+        try:
+            self.__session.close()
         except:
             raise
             print(":(")

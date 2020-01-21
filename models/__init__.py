@@ -14,6 +14,10 @@ import os
 HBNB_TYPE_STORAGE = os.getenv('HBNB_TYPE_STORAGE')
 if HBNB_TYPE_STORAGE == 'db':
     storage = DBStorage()
-else:
+    storage.reload()
+elif HBNB_TYPE_STORAGE == 'fs':
     storage = FileStorage()
-storage.reload()
+    storage.reload()
+else:
+    print("se putio todo")
+    exit(1)
