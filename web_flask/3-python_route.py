@@ -22,7 +22,10 @@ if __name__ == "__main__":
         text = text.replace('_', ' ')
         return "C %s" % text
 
-    @app.route('/python/(<text>)', strict_slashes=False)
+    @app.route('/python', strict_slashes=False)
+    @app.route('/python/<text>', strict_slashes=False)
     def pythontext(text="is cool"):
         text = text.replace("_", " ")
         return "Python %s" % text
+
+    app.run()
