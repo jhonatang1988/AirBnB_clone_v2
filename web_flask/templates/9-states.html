@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<HTML lang="en">
+  <HEAD>
+    <TITLE>HBNB</TITLE>
+  </HEAD>
+  <BODY>
+    {% if id and not objfound %}
+    <H1>Not found!</H1>
+    {% else %}
+    {% if not id -%}
+    <H1>States</H1>
+    {% else  -%}
+    <H1>State: {{ objfound|attr('name') }}</H1>
+    <H3>Cities:</H3>
+    {% endif -%}
+    <UL>
+      {% if not objfound -%}
+      {% for state in sortstatel -%}
+      <LI>{{ state|attr('id') }}: <B>{{ state|attr('name') }}</B></LI>
+      {% endfor %}
+      {% else -%}
+      {% for city in objfound|attr('cities') -%}
+      <LI>{{ city|attr('id') }}: <B>{{ city|attr('name') }}</B></LI>
+      {%- endfor %}
+      {% endif %}
+    </UL>
+    {% endif%}
+  </BODY>
+</HTML>
