@@ -25,4 +25,6 @@ class State(BaseModel, Base):
             if "City" in key and getattr(value, 'state_id') == self.id:
                 alist.append(value)
 
-        return alist
+        sortedlist = sorted(alist, key=lambda i: i.name)
+
+        return sortedlist
