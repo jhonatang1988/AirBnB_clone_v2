@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="../static/styles/4-common.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/3-footer.css">
+    <link rel="stylesheet" type="text/css" href="../static/styles/6-filters.css">
+    <link type="text/css" rel="stylesheet" href="../static/styles/8-places.css">
+    <link rel="icon" href="../static/images/icon.png" />
+    <title>HBnB</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo"></div>
+    </header>
+    <div class="container">
+      <section class="filters">
+	<div class="locations">
+	  <h3>States</h3>
+	  <h4>&nbsp;</h4>
+          <div class="popover">
+	    <ul>
+	      {% for state in sortstatel %}
+	      <h2>{{ state|attr('name') }}</h2>
+	      <ul>
+		{% for city in state|attr('cities') %}
+		<li>{{ city|attr('name') }}</li>
+		{% endfor %}
+	      </ul>
+	      {% endfor %}
+	    </ul>
+	  </div>
+	</div>
+	<div class="amenities">
+	  <h3>Amenities</h3>
+	  <h4>&nbsp;</h4>
+          <div class="popover">
+	    <ul>
+              {% for amenity in sortamenityl %}
+              <li>{{ amenity|attr('name') }}</li>
+              {% endfor %}
+            </ul>
+	  </div>
+	</div>
+	<button type="button">Search</button>
+      </section>
+      <section class="places">
+	<h1>Places</h1>
+	{% for place in sortplacel %}
+	<article>
+	  <div class="title_box">
+	    <h2>{{ place|attr('name') }}</h2>
+	    <div class="price_by_night">${{ place|attr('price_by_night') }}</div>
+	  </div>
+	  <div class="information">
+	    <div class="max_guest">{{ place|attr('max_guest') }} Guests</div>
+            <div class="number_rooms">{{ place|attr('number_rooms') }} Bedrooms</div>
+            <div class="number_bathrooms">{{ place|attr('number_bathrooms') }} Bathrooms</div>
+	  </div>
+	  <div class="user">
+	    {% for user in userl %}
+            {% if user|attr('id') == place|attr('user_id') %}
+	    <b>Owner:</b> {{ user|attr('first_name') }} {{ user|attr('last_name') }}
+	    {% endif %}
+	    {% endfor %}
+          </div>
+          <div class="description">
+	    {{ place|attr('description') }}
+          </div>
+	</article>
+	{% endfor %}
+      </section>
+    </div>
+    <footer>
+      <p>Holberton School</p>
+    </footer>
+  </body>
+</html>
